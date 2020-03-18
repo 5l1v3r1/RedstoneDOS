@@ -13,6 +13,8 @@ command_line:
     mov si, help
     call print_str
 
+    call cmd_main
+
 cmd_main:
     mov di, input
     mov al, 0
