@@ -2,10 +2,10 @@ bits 16
 
 %define DOS_VER '1.0'
 
-%include "utils/cmd.asm"
 %include "utils/string.asm"
 %include "utils/keyboard.asm"
 %include "utils/screen.asm"
+%include "utils/cmd.asm"
 %include "utils/fs.asm"
 
 disk_buffer	equ	24576
