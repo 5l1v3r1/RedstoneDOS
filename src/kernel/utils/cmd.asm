@@ -13,6 +13,12 @@ command_line:
 
 cmd_main:
 
+bin_file:
+    mov ax, command
+    mov bx, 0
+    mov cx, 32768
+    call open_file
+
 exit:
     ret
 
