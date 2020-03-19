@@ -336,8 +336,7 @@ l2hts:			; Calculate head, track and sector settings for int 13h
 
 	ret
 
-	times 510-($-$$) db 0	; Pad remainder of boot sector with 0s
-	dw 0xAA55		; The standard PC boot signature
+	jmp $
 
 
 buffer:				; Disk buffer begins (8k after this, stack starts)
