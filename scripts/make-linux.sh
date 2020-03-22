@@ -15,6 +15,7 @@ if test "`whoami`" != "root" ; then
 	exit
 fi
 
+mkdir disk_images/
 
 if [ ! -e disk_images/RedstoneDOS.flp ]
 then
@@ -25,27 +26,25 @@ fi
 
 echo ">>> Assembling bootloader..."
 
-nasm -O0 -w+orphan-labels -f bin -o ../../bootloader.bin ../src/kernel/bootloader/bootloader.asm || exit
+nasm -O0 -w+orphan-labels -f bin -o bootloader.bin ../src/kernel/bootloader/bootloader.asm || exit
 
 
 echo ">>> Assembling RedstoneDOS kernel..."
 
-cd ../src/kernel/
-nasm -O0 -w+orphan-labels -f bin -o RDOS.bin kernel.asm || exit
-cd ../../
+nasm -O0 -w+orphan-labels -f bin -o RDOS.bin ../src/kernel/kernel.asm || exit
 
 
 
 echo ">>> Adding bootloader to floppy image..."
 
-dd status=noxfer conv=notrunc if=src/kernel/bootloader.bin of=disk_images/RedstoneDOS.flp || exit
+dd status=noxfer conv=notrunc if=bootloader.bin of=disk_images/RedstoneDOS.flp || exit
 
 
 echo ">>> Copying RedstoneDOS kernel and programs..."
 
 rm -rf tmp-loop
 
-mkdir tmp-loop && mount -o loop -t vfat disk_images/RedstoneDOS.flp tmp-loop && cp src/kernel/RDOS.bin tmp-loop/
+mkdir tmp-loop && mount -o loop -t vfat disk_images/RedstoneDOS.flp tmp-loop && cp RDOS.bin tmp-loop/
 
 sleep 0.2
 
