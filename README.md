@@ -1,5 +1,6 @@
-<div align="center"
+<div align="center">
   <h1>RedstoneDOS</h1>
+  
   <p>Simple command line kernel</p>
 </div>
 
