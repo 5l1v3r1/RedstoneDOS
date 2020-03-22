@@ -12,6 +12,7 @@
 	%define BASIC_ASM
 
 %include "utils/mkOS_string.asm"
+%include "utils/audio.asm"
 
 %DEFINE VARIABLE 1
 %DEFINE STRING_VAR 2
