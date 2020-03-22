@@ -161,7 +161,7 @@ os_load_file:
 	jnc .floppy_ok			; Did the floppy reset OK?
 
 	mov ax, .err_msg_floppy_reset	; If not, bail out
-	jmp os_fatal_error
+	jmp fatal_error
 
 
 .floppy_ok:				; Ready to read first block of data
@@ -296,7 +296,7 @@ os_load_file:
 	jnc .load_file_sector
 
 	mov ax, .err_msg_floppy_reset	; Reset failed, bail out
-	jmp os_fatal_error
+	jmp fatal_error
 
 
 .calculate_next_cluster:
@@ -1281,6 +1281,9 @@ disk_reset_floppy:
 	pop ax
 	ret
 
+fatal_error:
+	mov si, fatal_msg
+	call print_str
 
 ; --------------------------------------------------------------------------
 ; disk_convert_l2hts -- Calculate head, track and sector for int 13h
@@ -1314,6 +1317,7 @@ disk_convert_l2hts:
 
 	ret
 
+	fatal_msg	db	'An error has occurred with the file system.'
 
 	Sides dw 2
 	SecsPerTrack dw 18

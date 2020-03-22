@@ -335,7 +335,7 @@ f17:
 
 statements:
     db 3,"new"
-    dw start
+    dw main_loop
 
     db 4,"list"
     dw list_statement
