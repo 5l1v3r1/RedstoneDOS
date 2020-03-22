@@ -305,5 +305,58 @@ string_parse:
 	pop si
 	ret
 ; ------------------------------------------
+string_length:
+    pusha
+
+    mov bx, ax
+
+    mov cx, 0
+
+.more:
+    cmp byte [bx], 0
+    je .done
+    inc bx
+    inc cx
+    jmp .more
+
+.done:
+    mov word [.tmp_counter], cx
+    popa
+
+    mov ax, [.tmp_counter]
+    ret
+
+    .tmp_counter dw 0
+; ------------------------------------------
+string_compare:
+    pusha
+
+.more:
+    mov al, [si]
+    mov bl, [di]
+
+    cmp al, bl
+    jne .not_same
+
+    cmp al, 0
+    je .terminated
+
+    inc si
+    inc di
+
+    jmp .more
+
+.not_same:
+    popa
+
+    clc
+
+    ret
+
+.terminated:
+    popa
+    stc
+    ret
+; ------------------------------------------
 
 %endif

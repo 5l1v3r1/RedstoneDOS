@@ -11,6 +11,8 @@
 %ifndef BASIC_ASM
 	%define BASIC_ASM
 
+%include "utils/mkOS_string.asm"
+
 %DEFINE VARIABLE 1
 %DEFINE STRING_VAR 2
 %DEFINE NUMBER 3
@@ -937,138 +939,6 @@ do_cls:
 	int 10h
 
 	jmp mainloop
-
-
-
-; ------------------------------------------------------------------
-; CURSOR
-
-do_cursor:
-	call get_token
-
-	mov si, token
-	mov di, .on_str
-	call os_string_compare
-	jc .turn_on
-
-	mov si, token
-	mov di, .off_str
-	call os_string_compare
-	jc .turn_off
-
-	mov si, err_syntax
-	jmp error
-
-.turn_on:
-	call os_show_cursor
-	jmp mainloop
-
-.turn_off:
-	call os_hide_cursor
-	jmp mainloop
-
-
-	.on_str db "ON", 0
-	.off_str db "OFF", 0
-
-
-; ------------------------------------------------------------------
-; CURSCHAR
-
-do_curschar:
-	call get_token
-
-	cmp ax, VARIABLE
-	je .is_variable
-
-	mov si, err_syntax
-	jmp error
-
-.is_variable:
-	mov ax, 0
-	mov byte al, [token]
-
-	push ax				; Store variable we're going to use
-
-	mov ah, 08h
-	mov bx, 0
-	mov byte bh, [work_page]
-	int 10h				; Get char at current cursor location
-
-	mov bx, 0			; We only want the lower byte (the char, not attribute)
-	mov bl, al
-
-	pop ax				; Get the variable back
-
-	call set_var			; And store the value
-
-	jmp mainloop
-
-
-; ------------------------------------------------------------------
-; CURSCOL
-
-do_curscol:
-	call get_token
-
-	cmp ax, VARIABLE
-	jne .error
-
-	mov ah, 0
-	mov byte al, [token]
-	push ax
-
-	mov ah, 8
-	mov bx, 0
-	mov byte bh, [work_page]
-	int 10h
-	mov bh, 0
-	mov bl, ah			; Get colour for higher byte; ignore lower byte (char)
-
-	pop ax
-	call set_var
-
-	jmp mainloop
-
-.error:
-	mov si, err_syntax
-	jmp error
-
-
-; ------------------------------------------------------------------
-; CURSPOS
-
-do_curspos:
-	mov byte bh, [work_page]
-	mov ah, 3
-	int 10h
-
-	call get_token
-	cmp ax, VARIABLE
-	jne .error
-
-	mov ah, 0			; Get the column in the first variable
-	mov byte al, [token]
-	mov bx, 0
-	mov bl, dl
-	call set_var
-
-	call get_token
-	cmp ax, VARIABLE
-	jne .error
-
-	mov ah, 0			; Get the row to the second
-	mov byte al, [token]
-	mov bx, 0
-	mov bl, dh
-	call set_var
-
-	jmp mainloop
-
-.error:
-	mov si, err_syntax
-	jmp error
-
 
 ; ------------------------------------------------------------------
 ; DELETE
