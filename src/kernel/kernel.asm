@@ -39,4 +39,4 @@ kernel_done:
     jmp $
 
 kernel_welcome_message db 'Welcome to RedstoneOS DOS version!'
-press_any_key_to_continue db 'To open the command line press any key. But don't be stupid and don't press the off key.'
+press_any_key_to_continue db 'To open the command line press any key.'

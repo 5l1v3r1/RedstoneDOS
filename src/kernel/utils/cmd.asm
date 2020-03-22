@@ -48,7 +48,7 @@ cmd_main:
     je cmd_main
 
     mov si, input
-    mov alm ' '
+    mov alm, ' '
     call string_tokenize
 
     mov word [param_list], di
@@ -90,9 +90,9 @@ cmd_main:
     call str_compare
     jc near exit
 
-    mov di, cd_str
-    call str_compare
-    jc near
+    ;mov di, cd_str
+    ;call str_compare
+    ;jc near
 
 bin_file:
     mov ax, command
@@ -251,7 +251,7 @@ exit:
 
 welcome_text db 'Welcome to RedstoneDOS!, VER: 1.0'
 help_text db 'Commands: dir, cd, help, exit, rm, ver'
-invalid_msg db 'No such command or program. Don't be stupid!.'
+invalid_msg db 'No such command or program.'
 ver_msg db 'RedstoneDOS, VER: 1.0'
 
 input times 256 db 0

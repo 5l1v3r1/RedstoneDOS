@@ -11,7 +11,7 @@ wait_for_key:
     mov [.tmp_buf], ax
 
     popa
-    mox ax, [.tmp_buf]
+    mov ax, [.tmp_buf]
     ret
 
     .tmp_buf dw 0
