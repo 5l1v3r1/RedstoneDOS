@@ -1,4 +1,4 @@
-%include "keyboard.asm"
+%include "utils/keyboard.asm"
 
 ; ------------------------------------------
 print_str:

@@ -1,8 +1,8 @@
-%include "screen.asm"
-%include "string.asm"
-%include "basic.asm"
-%include "keyboard.asm"
-%include "fs.asm"
+%include "utils/screen.asm"
+%include "utils/string.asm"
+%include "utils/basic.asm"
+%include "utils/keyboard.asm"
+%include "utils/fs.asm"
 
 command_line:
     call clear_screen
