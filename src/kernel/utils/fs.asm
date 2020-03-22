@@ -12,6 +12,8 @@
 %ifndef FS_ASM
 	%define FS_ASM
 
+section .text
+
 os_get_file_list:
 	pusha
 
