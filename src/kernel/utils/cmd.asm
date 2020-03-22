@@ -48,7 +48,7 @@ cmd_main:
     je cmd_main
 
     mov si, input
-    mov alm, ' '
+    mov al, ' '
     call string_tokenize
 
     mov word [param_list], di
@@ -121,15 +121,16 @@ excecute_bin:
     jmp cmd_main
 
 basic_file:
-    mov ax, command
-    mov bx, 0
-    mov cx, 32768
-    call os_load_file
-    jc total_fail
+    mov si, basic_not_supported_msg
+    call print_str
 
-    mov ax, 32768
-    mov word si, [param_list]
-    call os_run_basic
+    mov ax, 0
+    mov bx, 0
+    mov cx, 0
+    mov dx, 0
+
+    call 32768
+
     jmp cmd_main
 
 not_extension:
@@ -277,5 +278,7 @@ success_msg db 'File successfully deleted!'
 no_kernel_allowed_msg db 'The kernel cannot run this .bin file, possibly it is corrupt.'
 
 kern_file_string db 'RDOS', 0
+
+basic_not_supported_msg db 'For now the basic compiler is under maintenance. Please update your version of this operating system.'
 
 %endif
