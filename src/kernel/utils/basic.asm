@@ -100,22 +100,6 @@ mainloop:
 	mov di, cls_cmd
 	call os_string_compare
 	jc near do_cls
-
-	mov di, cursor_cmd
-	call os_string_compare
-	jc near do_cursor
-
-	mov di, curschar_cmd
-	call os_string_compare
-	jc near do_curschar
-
-	mov di, curscol_cmd
-	call os_string_compare
-	jc near do_curscol
-
-	mov di, curspos_cmd
-	call os_string_compare
-	jc near do_curspos
 	
 	mov di, delete_cmd
 	call os_string_compare
