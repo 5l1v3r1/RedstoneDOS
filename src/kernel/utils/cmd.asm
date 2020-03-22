@@ -13,7 +13,7 @@ command_line:
     mov si, welcome_text
     call print_str
 
-    mov si, help
+    mov si, help_str
     call print_str
 
     call cmd_main
@@ -28,8 +28,8 @@ cmd_main:
     mov cx, 32
     rep stosb
 
-    mov si, program
-    call print_str
+    ;mov si, program_str
+    ;call print_str FIXME: Why i defined this?
 
     call print_ln
 
