@@ -1,5 +1,8 @@
 %include "utils/keyboard.asm"
 
+%ifndef STRING_ASM
+    %define STRING_ASM
+
 ; ------------------------------------------
 print_str:
     mov ah, 0Eh
@@ -302,3 +305,5 @@ string_parse:
 	pop si
 	ret
 ; ------------------------------------------
+
+%endif

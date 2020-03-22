@@ -8,6 +8,9 @@
 ; ------------------------------------------------------------------
 ; Token types
 
+%ifndef BASIC_ASM
+	%define BASIC_ASM
+
 %DEFINE VARIABLE 1
 %DEFINE STRING_VAR 2
 %DEFINE NUMBER 3
@@ -4232,3 +4235,4 @@ vars_loc:
 
 
 ; ------------------------------------------------------------------
+%endif

@@ -4,6 +4,9 @@
 %include "utils/keyboard.asm"
 %include "utils/fs.asm"
 
+%ifndef CMD_ASM
+    %define CMD_ASM
+
 command_line:
     call clear_screen
 
@@ -274,3 +277,5 @@ success_msg db 'File successfully deleted!'
 no_kernel_allowed_msg db 'The kernel cannot run this .bin file, possibly it is corrupt.'
 
 kern_file_string db 'RDOS', 0
+
+%endif

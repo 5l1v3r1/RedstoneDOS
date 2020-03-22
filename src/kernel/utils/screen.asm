@@ -1,3 +1,6 @@
+%ifndef SCREEN_ASM
+    %define SCREEN_ASM
+
 clear_screen:
     pusha
 
@@ -43,3 +46,5 @@ print_int:
 
     popa
     ret
+
+%endif

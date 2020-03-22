@@ -9,6 +9,9 @@
 ; os_get_file_list -- Generate comma-separated string of files on floppy
 ; IN/OUT: AX = location to store zero-terminated filename string
 
+%ifndef FS_ASM
+	%define FS_ASM
+
 os_get_file_list:
 	pusha
 
@@ -1318,3 +1321,4 @@ disk_convert_l2hts:
 
 
 ; ==================================================================
+%endif

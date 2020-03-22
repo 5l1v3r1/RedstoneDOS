@@ -1,3 +1,6 @@
+%ifndef KEYBOARD_ASM
+    %define KEYBOARD_ASM
+
 wait_for_key:
     pusha
 
@@ -39,3 +42,5 @@ check_for_key:
     ret
 
     .tmp_buf dw 0
+
+%endif
