@@ -24,11 +24,7 @@ jobs:
 
     - name: Install NASM
       run: sudo apt install nasm
-    - name: Build Kernel
+    - name: Build OS
       run: |
-        cd src/kernel
-        nasm -O0 -w+orphan-labels -f bin -o RDOS.bin kernel.asm
-    - name: Build Bootloader
-      run: |
-        cd src/kernel/bootloader
-        nasm -O0 -w+orphan-labels -f bin -o bootloader.bin bootloader.asm
+        cd scripts/
+        ./make-linux.sh
