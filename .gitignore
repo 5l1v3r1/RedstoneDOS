@@ -1,0 +1,4 @@
+disk_images/
+*.o
+*.bin
+*.iso
