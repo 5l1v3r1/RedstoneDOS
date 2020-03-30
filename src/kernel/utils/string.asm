@@ -5,20 +5,22 @@
 
 ; ------------------------------------------
 print_str:
+    pusha
+
     mov ah, 0Eh
 
 .repeat:
     lodsb
     cmp al, 0
     je .done
+
     int 10h
     jmp .repeat
 
 .done:
-    ret
+    popa
 
-    times 510-($-$$) db 0
-    dw 0xAA55
+    ret
 
 ; ------------------------------------------
 input_string:
